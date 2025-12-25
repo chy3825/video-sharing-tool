@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作视频共享工具</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <!-- Google API -->
+    <script src="https://apis.google.com/js/api.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 工作视频共享工具</h1>
+        
+        <!-- 上传区域 -->
+        <div class="upload-section">
+            <h2>上传工作视频</h2>
+            <input type="file" id="videoInput" accept="video/*" style="display: none;">
+            <button onclick="document.getElementById('videoInput').click()" class="btn">
+                选择视频文件 (最大2GB)
+            </button>
+            
+            <div id="selectedFile" style="margin: 10px 0;"></div>
+            
+            <textarea id="commentInput" placeholder="添加工作注释、说明、注意事项..."></textarea>
+            <input type="text" id="projectName" placeholder="项目名称（可选）">
+            <input type="text" id="tags" placeholder="标签，用逗号分隔（如：bug修复, 功能演示）">
+            
+            <button onclick="uploadVideo()" class="btn-primary" id="uploadBtn">
+                上传视频并共享
+            </button>
+            
+            <div id="uploadProgress"></div>
+        </div>
+        
+        <!-- 视频列表区域 -->
+        <div class="videos-section">
+            <h2>共享的视频 <span id="count">(0)</span></h2>
+            
+            <div class="filter-controls">
+                <input type="text" id="searchInput" placeholder="搜索注释或项目...">
+                <select id="sortSelect">
+                    <option value="newest">最新上传</option>
+                    <option value="oldest">最早上传</option>
+                </select>
+            </div>
+            
+            <div id="videosList" class="videos-list">
+                <!-- 视频卡片将动态加载到这里 -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Firebase配置 -->
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+    <script src="google-drive-uploader.js"></script>
+</body>
+</html>
